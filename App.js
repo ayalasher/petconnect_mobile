@@ -1,10 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { useState } from "react";
 
 export default function App() {
+  const [isauthenticated, setIsauthenticated] = useState(false);
+
   return (
     <View style={styles.container}>
       <Text>Pet connect mobile</Text>
+      <ActivityIndicator size="large" />
       <StatusBar style="auto" />
     </View>
   );
