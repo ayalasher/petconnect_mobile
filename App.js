@@ -1,38 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
-import { useEffect, useState } from "react";
-import { useColorScheme } from "react-native";
+// import { StatusBar } from "expo-status-bar";
+import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
-import appcolors from "./assets/colors/colors";
-
-import {} from "@react-navigation/native-stack";
 import store from "./assets/redux/Store";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import LaunchScreen from "./assets/components/screens/Launchscreen";
 
 export default function App() {
-  const [isauthenticated, setIsauthenticated] = useState(false);
-  const [theme, setTheme] = useState("");
+  const Stack = createNativeStackNavigator();
 
-  let colorScheme = useColorScheme();
-
-  // let colorscheme2 = Appearance.getColorScheme();
-  // let listenToChange = Appearance.addChangeListener();
-  // setTheme(colorscheme2);
-
-  useEffect(() => {
-    setTheme(colorScheme);
-  }, [colorScheme]);
+  function Appnavigator() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Laucnh"
+            options={{ headerShown: false, title: "Lauch Screen" }}
+            component={LaunchScreen}
+          />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </NavigationContainer>
+    );
+  }
 
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text style={styles.testingtxt}>react native hoyee!!!</Text>
-        <Text style={styles.testingtxt}>
-          {theme === "dark" ? "Dark theme " : "light theme"}
-        </Text>
-
-        <ActivityIndicator size="large" />
-        <StatusBar style="auto" />
-      </View>
+      <Appnavigator />
     </Provider>
   );
 }
@@ -40,12 +35,17 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },
   testingtxt: {
     color: "green",
     // fontSize:""
+  },
+  darkmodescreencolor: {
+    backgroundColor: "black",
+  },
+  lightmodescreencolor: {
+    backgroundColor: "white",
   },
 });

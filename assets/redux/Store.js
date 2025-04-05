@@ -2,9 +2,9 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const userthemeSlice = createSlice({
   name: "userTheme",
-  initialState: "",
+  initialState: { value: "" },
   reducers: {
-    updateusertheme: (state, action) => {
+    updateUserTheme: (state, action) => {
       return action.payload;
     },
   },
@@ -14,7 +14,7 @@ export const { updateUserTheme } = userthemeSlice.actions;
 
 const store = configureStore({
   reducer: {
-    usertheme: userthemeSlice.reducer,
+    userTheme: userthemeSlice.reducer,
   },
 });
 
