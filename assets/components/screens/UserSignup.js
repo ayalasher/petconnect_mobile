@@ -1,8 +1,10 @@
 import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
-export default function UserSignupscreen() {
+export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
+  const navigator = useNavigation();
 
   const screencolor =
     userTheme === "dark"
@@ -14,7 +16,8 @@ export default function UserSignupscreen() {
 
   function navigateToUSerSignput() {
     // alert("Button testing");
-    navigation.navigate("User sign up  screen");
+    navigation.navigate("SPP Log in  up  screen");
+    // navigator.navigate(-1);
   }
 
   function loginHandler() {
@@ -60,7 +63,7 @@ export default function UserSignupscreen() {
             style={[styles.toSignupButton]}
             onPress={navigateToUSerSignput}
           >
-            <Text style={[textcolor]}>Log in</Text>
+            <Text style={[textcolor]}>SPP auth screens</Text>
           </Pressable>
           {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
         </View>
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     marginVertical: 15,
-    borderColor: "#999999",
+    borderColor: "#1f1f1f",
     borderWidth: 2,
   },
   inputlables: {

@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { useSelector } from "react-redux";
 
 export default function UserLoginscreen({ navigation }) {
@@ -106,7 +113,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     marginVertical: 15,
-    borderColor: "#999999",
+    borderColor: "#1f1f1f",
     borderWidth: 2,
   },
   inputlables: {

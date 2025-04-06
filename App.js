@@ -45,13 +45,13 @@ export default function App() {
         <Stack.Screen
           name="SPP Log in  up  screen"
           component={SppLoginscreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="SPP sign up screen"
           component={SppSigupscreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
