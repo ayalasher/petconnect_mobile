@@ -6,9 +6,41 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import LaunchScreen from "./assets/components/screens/Launchscreen";
+import UserLoginscreen from "./assets/components/screens/UserLoginscreen";
+import UserSignupscreen from "./assets/components/screens/UserSignup";
+import SppLoginscreen from "./assets/components/screens/SppLogin";
+import SppSigupscreen from "./assets/components/screens/SppSignup";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+
+  function Authscreens() {
+    <Stack.Navigator>
+      <Stack.Screen
+        name="User log in  screen"
+        component={UserLoginscreen}
+        options={{}}
+      />
+
+      <Stack.Screen
+        name="User sign up  screen"
+        component={UserSignupscreen}
+        options={{}}
+      />
+
+      <Stack.Screen
+        name="SPP Log in  up  screen"
+        component={SppLoginscreen}
+        options={{}}
+      />
+
+      <Stack.Screen
+        name="SPP sign up screen"
+        component={SppSigupscreen}
+        options={{}}
+      />
+    </Stack.Navigator>;
+  }
 
   function Appnavigator() {
     return (
@@ -18,6 +50,11 @@ export default function App() {
             name="Laucnh"
             options={{ headerShown: false, title: "Lauch Screen" }}
             component={LaunchScreen}
+          />
+          <Stack.Screen
+            name="Auth screens"
+            options={{ headerShown: false, title: "Lauch Screen" }}
+            component={Authscreens}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
