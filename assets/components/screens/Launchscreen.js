@@ -5,17 +5,24 @@ import {
   View,
   ActivityIndicator,
   useColorScheme,
+  Button,
+  Pressable,
 } from "react-native";
 import { updateUserTheme } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function LaunchScreen() {
+export default function LaunchScreen({ navigation }) {
   const [isauthenticated, setIsauthenticated] = useState(false);
 
   const dispatch = useDispatch();
   const userTheme = useSelector((state) => state.userTheme);
 
   let colorScheme = useColorScheme();
+
+  function navigationTesting() {
+    navigation.navigate("Auth screens");
+    // alert("Navigation testing");
+  }
 
   const screencolor =
     userTheme === "dark"
@@ -35,8 +42,11 @@ export default function LaunchScreen() {
       <Text style={[textcolor]}>
         {userTheme === "dark" ? "Dark theme " : "light theme"}
       </Text>
-
       <ActivityIndicator size="large" />
+
+      <Pressable onPress={navigationTesting} style={[styles.buttonTeststyles]}>
+        <Text>Navigation testing</Text>
+      </Pressable>
     </View>
   );
 }
@@ -62,5 +72,12 @@ const styles = StyleSheet.create({
   },
   lightmodeTextcolor: {
     color: "black",
+  },
+  buttonTeststyles: {
+    // color: "",
+    backgroundColor: "yellow",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 15,
   },
 });

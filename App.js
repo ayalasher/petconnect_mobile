@@ -33,13 +33,13 @@ export default function App() {
         <Stack.Screen
           name="User log in  screen"
           component={UserLoginscreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
           name="User sign up  screen"
           component={UserSignupscreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
