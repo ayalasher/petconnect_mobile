@@ -228,4 +228,10 @@ const styles = StyleSheet.create({
   lightmodescreencolor: {
     backgroundColor: "white",
   },
+  darkmodeTextcolor: {
+    color: "white",
+  },
+  lightmodeTextcolor: {
+    color: "black",
+  },
 });

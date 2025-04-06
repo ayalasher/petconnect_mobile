@@ -22,14 +22,17 @@ export default function LaunchScreen() {
       ? styles.darkmodescreencolor
       : styles.lightmodescreencolor;
 
+  const textcolor =
+    userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
+
   useEffect(() => {
     dispatch(updateUserTheme(colorScheme));
   }, [colorScheme]);
 
   return (
     <View style={[styles.container, screencolor]}>
-      <Text style={styles.testingtxt}>react native hoyee!!!</Text>
-      <Text style={styles.testingtxt}>
+      <Text style={[textcolor]}>react native hoyee!!!</Text>
+      <Text style={[textcolor]}>
         {userTheme === "dark" ? "Dark theme " : "light theme"}
       </Text>
 
@@ -53,5 +56,11 @@ const styles = StyleSheet.create({
   },
   lightmodescreencolor: {
     backgroundColor: "white",
+  },
+  darkmodeTextcolor: {
+    color: "white",
+  },
+  lightmodeTextcolor: {
+    color: "black",
   },
 });

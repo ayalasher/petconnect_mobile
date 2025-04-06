@@ -8,4 +8,22 @@ export default function SpplistedEditing() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screencontainer: {
+    flex: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+  },
+  darkmodescreencolor: {
+    backgroundColor: "black",
+  },
+  lightmodescreencolor: {
+    backgroundColor: "white",
+  },
+  darkmodeTextcolor: {
+    color: "white",
+  },
+  lightmodeTextcolor: {
+    color: "black",
+  },
+});
