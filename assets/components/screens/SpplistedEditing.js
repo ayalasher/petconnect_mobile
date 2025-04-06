@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Userproductscreen() {
+export default function SpplistedEditing() {
   return (
     <View>
-      <Text>User products screen</Text>
+      <Text>Edit the listed products and services</Text>
     </View>
   );
 }

@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Userproductscreen() {
+export default function SppaddproductOrService() {
   return (
     <View>
-      <Text>User products screen</Text>
+      <Text>Add a product or a service</Text>
     </View>
   );
 }

@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Userproductscreen() {
+export default function UserSettigsandlogoutScreen() {
   return (
     <View>
-      <Text>User products screen</Text>
+      <Text>User settings and logout screen </Text>
     </View>
   );
 }

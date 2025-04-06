@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Userproductscreen() {
+export default function SpplistedDeleting() {
   return (
     <View>
-      <Text>User products screen</Text>
+      <Text>Spp listed deleting screen</Text>
     </View>
   );
 }

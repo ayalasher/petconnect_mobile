@@ -1,5 +1,5 @@
 // import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { Provider } from "react-redux";
 import store from "./assets/redux/Store";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,36 +10,155 @@ import UserLoginscreen from "./assets/components/screens/UserLoginscreen";
 import UserSignupscreen from "./assets/components/screens/UserSignup";
 import SppLoginscreen from "./assets/components/screens/SppLogin";
 import SppSigupscreen from "./assets/components/screens/SppSignup";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Userhomescreen from "./assets/components/screens/Userhomescreen";
+import Userproductscreen from "./assets/components/screens/Userproductsscreen";
+import UserChatsScreen from "./assets/components/screens/Userchats";
+import SppHomeScreen from "./assets/components/screens/Spphome";
+import Spplisted from "./assets/components/screens/Spplisted";
+import SppaddproductOrService from "./assets/components/screens/SppaddproductOrService";
+import Sppsearch from "./assets/components/screens/Sppsearch";
+import SppChatScreen from "./assets/components/screens/Sppchat";
+import UserSettigsandlogoutScreen from "./assets/components/screens/UserSettingsandlogout";
+import SpplistedEditing from "./assets/components/screens/SpplistedEditing";
+import SpplistedDeleting from "./assets/components/screens/SppListeddeleting";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
 
   function Authscreens() {
-    <Stack.Navigator>
-      <Stack.Screen
-        name="User log in  screen"
-        component={UserLoginscreen}
-        options={{}}
-      />
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="User log in  screen"
+          component={UserLoginscreen}
+          options={{}}
+        />
 
-      <Stack.Screen
-        name="User sign up  screen"
-        component={UserSignupscreen}
-        options={{}}
-      />
+        <Stack.Screen
+          name="User sign up  screen"
+          component={UserSignupscreen}
+          options={{}}
+        />
 
-      <Stack.Screen
-        name="SPP Log in  up  screen"
-        component={SppLoginscreen}
-        options={{}}
-      />
+        <Stack.Screen
+          name="SPP Log in  up  screen"
+          component={SppLoginscreen}
+          options={{}}
+        />
 
-      <Stack.Screen
-        name="SPP sign up screen"
-        component={SppSigupscreen}
-        options={{}}
-      />
-    </Stack.Navigator>;
+        <Stack.Screen
+          name="SPP sign up screen"
+          component={SppSigupscreen}
+          options={{}}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function Userbottomtabscreens() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen
+          name=" User Home screen "
+          component={Userhomescreen}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" User products screen "
+          component={Userproductscreen}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" User services screen "
+          component={Userproductscreen}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" User chats screen "
+          component={UserChatsScreen}
+          options={{}}
+        />
+      </Tab.Navigator>
+    );
+  }
+
+  function UserSettingsandLogout() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="User Settings and logout screen"
+          component={UserSettigsandlogoutScreen}
+          options={{}}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function SppBottomtabsScreens() {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen
+          name=" SPP home screen "
+          component={SppHomeScreen}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" SPP listed screen "
+          component={Spplisted}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" SPP add product or service screen "
+          component={SppaddproductOrService}
+          options={{}}
+        />
+
+        {/* Purpose of the screen to be reviewed */}
+        {/* Sellers can serach for a product to compare  prices for a product or service from other sellers */}
+        <Tab.Screen
+          name=" SPP search  screen "
+          component={Sppsearch}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" SPP chat screen "
+          component={SppChatScreen}
+          options={{}}
+        />
+
+        <Tab.Screen
+          name=" SPP add product or service screen "
+          component={SppaddproductOrService}
+          options={{}}
+        />
+      </Tab.Navigator>
+    );
+  }
+
+  function SpplitsedDeletingAndEditingScreens() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Listed and edited screen"
+          component={SpplistedEditing}
+          options={{}}
+        />
+
+        <Stack.Screen
+          name="Listed and deleting screen"
+          component={SpplistedDeleting}
+          options={{}}
+        />
+      </Stack.Navigator>
+    );
   }
 
   function Appnavigator() {
@@ -48,13 +167,37 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen
             name="Laucnh"
-            options={{ headerShown: false, title: "Lauch Screen" }}
+            options={{ headerShown: false, title: "Launch Screen" }}
             component={LaunchScreen}
           />
           <Stack.Screen
             name="Auth screens"
-            options={{ headerShown: false, title: "Lauch Screen" }}
+            options={{ headerShown: false, title: "Auth Screen" }}
             component={Authscreens}
+          />
+
+          <Stack.Screen
+            name="User bottom tab screens"
+            options={{ headerShown: false, title: "User screens" }}
+            component={Userbottomtabscreens}
+          />
+
+          <Stack.Screen
+            name="SPP bottom tab screens"
+            options={{ headerShown: false, title: "User screens" }}
+            component={SppBottomtabsScreens}
+          />
+
+          <Stack.Screen
+            name="User settings and logout screens"
+            options={{ headerShown: false, title: "User screens" }}
+            component={UserSettingsandLogout}
+          />
+
+          <Stack.Screen
+            name="Spp listed and deleted screens"
+            options={{ headerShown: false, title: "User screens" }}
+            component={SpplitsedDeletingAndEditingScreens}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
