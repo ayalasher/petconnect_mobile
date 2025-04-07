@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -7,9 +8,15 @@ import {
   ScrollView,
 } from "react-native";
 import { useSelector } from "react-redux";
+// import axios from "axios";
 
 export default function UserLoginscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
+
+  const [userdata, setUserdata] = useState({
+    useremail: "",
+    userPassword: "",
+  });
 
   const screencolor =
     userTheme === "dark"
@@ -28,6 +35,14 @@ export default function UserLoginscreen({ navigation }) {
     alert("User logged in");
   }
 
+  function captureEmailHanlder(userEnteredEmail) {
+    setUserdata({ ...userdata, useremail: userEnteredEmail });
+  }
+
+  function capturePassowrdHandler(userEnteredPassword) {
+    setUserdata({ ...userdata, userPassword: userEnteredPassword });
+  }
+
   return (
     <View style={[styles.screencontainer, screencolor]}>
       <View style={[styles.loginFormcontainer]}>
@@ -35,11 +50,23 @@ export default function UserLoginscreen({ navigation }) {
 
         <View>
           <Text style={[textcolor, styles.inputlables]}>Email </Text>
-          <TextInput style={[styles.textinputs]} placeholder="Enter email" />
+          <TextInput
+            placeholderTextColor={" #808080"}
+            style={[styles.textinputs]}
+            placeholder="Enter email"
+            value={userdata.useremail}
+            onChangeText={captureEmailHanlder}
+          />
         </View>
         <View>
           <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput style={[styles.textinputs]} placeholder="Enter password" />
+          <TextInput
+            placeholderTextColor={" #808080"}
+            style={[styles.textinputs]}
+            placeholder="Enter password"
+            value={userdata.userPassword}
+            onChangeText={capturePassowrdHandler}
+          />
         </View>
 
         <View>
@@ -113,7 +140,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     marginVertical: 15,
-    borderColor: "#1f1f1f",
+    borderColor: "#808080",
     borderWidth: 2,
   },
   inputlables: {

@@ -178,13 +178,13 @@ export default function App() {
           />
           <Stack.Screen
             name="User Auth screens"
-            options={{ headerShown: false, title: "Auth Screen" }}
+            options={{ headerShown: false, title: "User Auth Screen" }}
             component={UserAuthscreens}
           />
 
           <Stack.Screen
             name="Spp Auth screens"
-            options={{ headerShown: false, title: "Auth Screen" }}
+            options={{ headerShown: false, title: "SPP Auth Screen" }}
             component={Sppauthscreens}
           />
 

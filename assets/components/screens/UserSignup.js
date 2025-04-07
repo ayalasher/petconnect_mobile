@@ -29,6 +29,7 @@ export default function UserSignupscreen({ navigation }) {
         <View>
           <Text style={[textcolor, styles.inputlables]}>First name</Text>
           <TextInput
+            placeholderTextColor={" #808080"}
             style={[styles.textinputs]}
             placeholder="Enter first name"
           />
@@ -36,17 +37,26 @@ export default function UserSignupscreen({ navigation }) {
         <View>
           <Text style={[textcolor, styles.inputlables]}>Last name </Text>
           <TextInput
+            placeholderTextColor={" #808080"}
             style={[styles.textinputs]}
             placeholder="Enter last name"
           />
         </View>
         <View>
           <Text style={[textcolor, styles.inputlables]}>Email </Text>
-          <TextInput style={[styles.textinputs]} placeholder="Enter email" />
+          <TextInput
+            placeholderTextColor={" #808080"}
+            style={[styles.textinputs]}
+            placeholder="Enter email"
+          />
         </View>
         <View>
           <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput style={[styles.textinputs]} placeholder="Enter password" />
+          <TextInput
+            placeholderTextColor={" #808080"}
+            style={[styles.textinputs]}
+            placeholder="Enter password"
+          />
         </View>
 
         <View>
@@ -120,7 +130,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 10,
     marginVertical: 15,
-    borderColor: "#1f1f1f",
+    borderColor: "#808080",
     borderWidth: 2,
   },
   inputlables: {
