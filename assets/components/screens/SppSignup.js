@@ -1,10 +1,17 @@
 import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import axios from "axios";
 
 export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const navigator = useNavigation();
+  const [sppdata, setSppdata] = useState({
+    estname: "",
+    estemail: "",
+    estpassword: "",
+  });
 
   const screencolor =
     userTheme === "dark"
@@ -19,7 +26,32 @@ export default function UserSignupscreen({ navigation }) {
   }
 
   function loginHandler() {
-    alert("SPP has signed up");
+    try {
+      let response = axios.post(
+        "http://localhost:3000/backend/SignUpForServiceAndProductProviders",
+        sppdata,
+        {
+          headers: {
+            "Content-Type": "Application/json",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(`Error:$${error}`);
+    }
+  }
+
+  function captureNamehandler(sppProvidedName) {
+    setSppdata({ ...sppdata, estname: sppProvidedName });
+  }
+
+  function captureEmailhandler(sppProvidedemail) {
+    setSppdata({ ...sppdata, estemail: sppProvidedemail });
+  }
+
+  function capturePasswordhandler(sppProvidedPassowrd) {
+    setSppdata({ ...sppdata, estpassword: sppProvidedPassowrd });
   }
 
   return (
@@ -33,6 +65,8 @@ export default function UserSignupscreen({ navigation }) {
           <TextInput
             style={[styles.textinputs]}
             placeholder="Enter establishment name"
+            value={sppdata.estname}
+            onChangeText={captureNamehandler}
           />
         </View>
         {/* <View>
@@ -47,11 +81,18 @@ export default function UserSignupscreen({ navigation }) {
           <TextInput
             style={[styles.textinputs]}
             placeholder="Enter establishment email"
+            value={sppdata.estemail}
+            onChangeText={captureEmailhandler}
           />
         </View>
         <View>
           <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput style={[styles.textinputs]} placeholder="Enter password" />
+          <TextInput
+            value={sppdata.estpassword}
+            style={[styles.textinputs]}
+            placeholder="Enter password"
+            onChangeText={capturePasswordhandler}
+          />
         </View>
 
         <View>

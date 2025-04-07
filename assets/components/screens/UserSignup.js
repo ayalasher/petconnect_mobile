@@ -26,7 +26,7 @@ export default function UserSignupscreen({ navigation }) {
     alert("User signed in ");
   }
 
-  async function loginHandler() {
+  async function signUpHandler() {
     try {
       let response = await axios.post(
         "http://localhost:3000/backend/userSignUp",
@@ -105,7 +105,7 @@ export default function UserSignupscreen({ navigation }) {
         </View>
 
         <View>
-          <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
+          <Pressable onPress={signUpHandler} style={[styles.loginbutton]}>
             <Text style={[textcolor]}>Sign up</Text>
           </Pressable>
         </View>
