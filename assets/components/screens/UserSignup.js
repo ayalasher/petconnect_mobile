@@ -23,7 +23,8 @@ export default function UserSignupscreen({ navigation }) {
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
   function navigateToUSerlogin() {
-    navigation.navigate("User log in  screen");
+    // navigation.navigate("User log in  screen");
+    navigator.goBack();
   }
 
   async function signUpHandler() {

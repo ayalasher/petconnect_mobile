@@ -21,8 +21,8 @@ export default function UserSignupscreen({ navigation }) {
   const textcolor =
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
-  function navigateToUSerSignput() {
-    alert("SPP signed up");
+  function navigatetospplogin() {
+    navigator.goBack();
   }
 
   function loginHandler() {
@@ -105,7 +105,7 @@ export default function UserSignupscreen({ navigation }) {
           <Text style={[textcolor]}>Already have an account ? </Text>
           <Pressable
             style={[styles.toSignupButton]}
-            onPress={navigateToUSerSignput}
+            onPress={navigatetospplogin}
           >
             <Text style={[textcolor]}>Log in</Text>
           </Pressable>
