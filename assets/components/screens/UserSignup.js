@@ -22,8 +22,8 @@ export default function UserSignupscreen({ navigation }) {
   const textcolor =
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
-  function navigateToUSerSignput() {
-    alert("User signed in ");
+  function navigateToUSerlogin() {
+    navigation.navigate("User log in  screen");
   }
 
   async function signUpHandler() {
@@ -114,7 +114,7 @@ export default function UserSignupscreen({ navigation }) {
           <Text style={[textcolor]}>Already have an account ? </Text>
           <Pressable
             style={[styles.toSignupButton]}
-            onPress={navigateToUSerSignput}
+            onPress={navigateToUSerlogin}
           >
             <Text style={[textcolor]}>Log in</Text>
           </Pressable>
