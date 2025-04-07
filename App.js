@@ -27,7 +27,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
-  function Authscreens() {
+  function UserAuthscreens() {
     return (
       <Stack.Navigator>
         <Stack.Screen
@@ -41,7 +41,13 @@ export default function App() {
           component={UserSignupscreen}
           options={{ headerShown: false }}
         />
+      </Stack.Navigator>
+    );
+  }
 
+  function Sppauthscreens() {
+    return (
+      <Stack.Navigator>
         <Stack.Screen
           name="SPP Log in  up  screen"
           component={SppLoginscreen}
@@ -171,9 +177,15 @@ export default function App() {
             component={LaunchScreen}
           />
           <Stack.Screen
-            name="Auth screens"
+            name="User Auth screens"
             options={{ headerShown: false, title: "Auth Screen" }}
-            component={Authscreens}
+            component={UserAuthscreens}
+          />
+
+          <Stack.Screen
+            name="Spp Auth screens"
+            options={{ headerShown: false, title: "Auth Screen" }}
+            component={Sppauthscreens}
           />
 
           <Stack.Screen

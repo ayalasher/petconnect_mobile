@@ -58,7 +58,7 @@ export default function UserSignupscreen({ navigation }) {
 
         <View>
           <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
-            <Text style={[textcolor]}>Log in</Text>
+            <Text style={[textcolor]}>Sign up</Text>
           </Pressable>
         </View>
 

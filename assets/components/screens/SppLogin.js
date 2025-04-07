@@ -43,7 +43,7 @@ export default function UserLoginscreen({ navigation }) {
           />
         </View>
         <View>
-          <Text style={[textcolor, styles.inputlables]}>Your assword </Text>
+          <Text style={[textcolor, styles.inputlables]}>Password </Text>
           <TextInput style={[styles.textinputs]} placeholder="Enter password" />
         </View>
 

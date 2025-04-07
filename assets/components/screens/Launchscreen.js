@@ -20,7 +20,7 @@ export default function LaunchScreen({ navigation }) {
   let colorScheme = useColorScheme();
 
   function navigationTesting() {
-    navigation.navigate("Auth screens");
+    navigation.navigate("Spp Auth screens");
     // alert("Navigation testing");
   }
 

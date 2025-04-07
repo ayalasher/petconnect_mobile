@@ -15,9 +15,7 @@ export default function UserSignupscreen({ navigation }) {
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
   function navigateToUSerSignput() {
-    // alert("Button testing");
-    navigation.navigate("SPP Log in  up  screen");
-    // navigator.navigate(-1);
+    alert("User signed in ");
   }
 
   function loginHandler() {
@@ -53,7 +51,7 @@ export default function UserSignupscreen({ navigation }) {
 
         <View>
           <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
-            <Text style={[textcolor]}>Log in</Text>
+            <Text style={[textcolor]}>Sign up</Text>
           </Pressable>
         </View>
 
@@ -63,7 +61,7 @@ export default function UserSignupscreen({ navigation }) {
             style={[styles.toSignupButton]}
             onPress={navigateToUSerSignput}
           >
-            <Text style={[textcolor]}>SPP auth screens</Text>
+            <Text style={[textcolor]}>Log in</Text>
           </Pressable>
           {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
         </View>
