@@ -15,9 +15,7 @@ export default function UserSignupscreen({ navigation }) {
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
   function navigateToUSerSignput() {
-    // alert("Button testing");
-    navigation.navigate("SPP sign up screen");
-    // navigator.navigate(-1);
+    alert("SPP signed up");
   }
 
   function loginHandler() {
