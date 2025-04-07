@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useSelector } from "react-redux";
-// import axios from "axios";
+import axios from "axios";
 
 export default function UserLoginscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
@@ -31,8 +31,23 @@ export default function UserLoginscreen({ navigation }) {
     navigation.navigate("User sign up  screen");
   }
 
-  function loginHandler() {
-    alert("User logged in");
+  async function loginHandler() {
+    // route is set to localhost for testing purposes
+    const response = await axios.post(
+      "http://localhost:3000/backend/userLogin",
+      userdata,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+
+    try {
+    } catch (error) {
+      console.log(`Error:${error}`);
+    }
   }
 
   function captureEmailHanlder(userEnteredEmail) {

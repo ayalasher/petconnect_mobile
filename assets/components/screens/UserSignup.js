@@ -1,10 +1,18 @@
 import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import axios from "axios";
 
 export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const navigator = useNavigation();
+  const [userdata, setUserdata] = useState({
+    firstname: "",
+    lastname: "",
+    userpassword: "",
+    useremail: "",
+  });
 
   const screencolor =
     userTheme === "dark"
@@ -18,8 +26,37 @@ export default function UserSignupscreen({ navigation }) {
     alert("User signed in ");
   }
 
-  function loginHandler() {
-    alert("User has signed up");
+  async function loginHandler() {
+    try {
+      let response = await axios.post(
+        "http://localhost:3000/backend/userSignUp",
+        userdata,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(`Error:${error}`);
+    }
+  }
+
+  function captureFirstnameHandler(userProvidefirstname) {
+    setUserdata({ ...userdata, firstname: userProvidefirstname });
+  }
+
+  function captureLastnameHandler(userProvidelastname) {
+    setUserdata({ ...userdata, lastname: userProvidelastname });
+  }
+
+  function captureEmailHandler(userProvidedemail) {
+    setUserdata({ ...userdata, useremail: userProvidedemail });
+  }
+
+  function capturePassowrdHandler(userProvidedPassword) {
+    setUserdata({ ...userdata, userpassword: userProvidedPassword });
   }
 
   return (
@@ -32,6 +69,8 @@ export default function UserSignupscreen({ navigation }) {
             placeholderTextColor={" #808080"}
             style={[styles.textinputs]}
             placeholder="Enter first name"
+            value={userdata.firstname}
+            onChangeText={captureFirstnameHandler}
           />
         </View>
         <View>
@@ -40,6 +79,8 @@ export default function UserSignupscreen({ navigation }) {
             placeholderTextColor={" #808080"}
             style={[styles.textinputs]}
             placeholder="Enter last name"
+            value={userdata.lastname}
+            onChangeText={captureLastnameHandler}
           />
         </View>
         <View>
@@ -48,6 +89,8 @@ export default function UserSignupscreen({ navigation }) {
             placeholderTextColor={" #808080"}
             style={[styles.textinputs]}
             placeholder="Enter email"
+            value={userdata.useremail}
+            onChangeText={captureEmailHandler}
           />
         </View>
         <View>
@@ -56,6 +99,8 @@ export default function UserSignupscreen({ navigation }) {
             placeholderTextColor={" #808080"}
             style={[styles.textinputs]}
             placeholder="Enter password"
+            value={userdata.userpassword}
+            onChangeText={capturePassowrdHandler}
           />
         </View>
 
