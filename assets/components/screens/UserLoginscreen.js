@@ -29,10 +29,6 @@ export default function UserLoginscreen({ navigation }) {
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
   function navigateToUSerSignput() {
-    console.log("error");
-
-    // alert("Button testing");
-    alert("error");
     navigation.navigate("User sign up  screen");
   }
 
@@ -40,7 +36,7 @@ export default function UserLoginscreen({ navigation }) {
     try {
       // route is set to localhost for testing purposes
       const response = await axios.post(
-        "http://localhost:3000/backend/userLogin",
+        "192.168.100.10:3000/backend/userLogin",
         userdata,
         {
           headers: {
@@ -92,17 +88,18 @@ export default function UserLoginscreen({ navigation }) {
             <Text style={[textcolor, styles.inputlables]}>Email </Text>
             <TextInput
               placeholderTextColor={" #808080"}
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter email"
               value={userdata.useremail}
               onChangeText={captureEmailHanlder}
+              keyboardType="email-address"
             />
           </View>
           <View>
             <Text style={[textcolor, styles.inputlables]}>Password </Text>
             <TextInput
               placeholderTextColor={" #808080"}
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter password"
               value={userdata.userPassword}
               onChangeText={capturePassowrdHandler}

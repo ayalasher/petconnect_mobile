@@ -16,10 +16,10 @@ export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const navigator = useNavigation();
   const [userdata, setUserdata] = useState({
-    firstname: "",
-    lastname: "",
-    userpassword: "",
-    useremail: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    userEmail: "",
   });
 
   const screencolor =
@@ -38,7 +38,7 @@ export default function UserSignupscreen({ navigation }) {
   async function signUpHandler() {
     try {
       let response = await axios.post(
-        "http://localhost:3000/backend/userSignUp",
+        "http://192.168.100.10:3000/backend/userSignUp/",
         userdata,
         {
           headers: {
@@ -56,10 +56,10 @@ export default function UserSignupscreen({ navigation }) {
         );
 
         setUserdata({
-          firstname: "",
-          lastname: "",
-          userpassword: "",
-          useremail: "",
+          firstName: "",
+          lastName: "",
+          password: "",
+          userEmail: "",
         });
 
         // Navigate to home screen
@@ -73,19 +73,19 @@ export default function UserSignupscreen({ navigation }) {
   }
 
   function captureFirstnameHandler(userProvidefirstname) {
-    setUserdata({ ...userdata, firstname: userProvidefirstname });
+    setUserdata({ ...userdata, firstName: userProvidefirstname });
   }
 
   function captureLastnameHandler(userProvidelastname) {
-    setUserdata({ ...userdata, lastname: userProvidelastname });
+    setUserdata({ ...userdata, lastName: userProvidelastname });
   }
 
   function captureEmailHandler(userProvidedemail) {
-    setUserdata({ ...userdata, useremail: userProvidedemail });
+    setUserdata({ ...userdata, userEmail: userProvidedemail });
   }
 
   function capturePassowrdHandler(userProvidedPassword) {
-    setUserdata({ ...userdata, userpassword: userProvidedPassword });
+    setUserdata({ ...userdata, password: userProvidedPassword });
   }
 
   return (
@@ -100,9 +100,9 @@ export default function UserSignupscreen({ navigation }) {
             <Text style={[textcolor, styles.inputlables]}>First name</Text>
             <TextInput
               placeholderTextColor={" #808080"}
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter first name"
-              value={userdata.firstname}
+              value={userdata.firstName}
               onChangeText={captureFirstnameHandler}
             />
           </View>
@@ -110,30 +110,30 @@ export default function UserSignupscreen({ navigation }) {
             <Text style={[textcolor, styles.inputlables]}>Last name </Text>
             <TextInput
               placeholderTextColor={" #808080"}
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter last name"
-              value={userdata.lastname}
+              value={userdata.lastName}
               onChangeText={captureLastnameHandler}
             />
           </View>
           <View>
             <Text style={[textcolor, styles.inputlables]}>Email </Text>
             <TextInput
-              keyboardType="password"
               placeholderTextColor={" #808080"}
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter email"
-              value={userdata.useremail}
+              value={userdata.userEmail}
               onChangeText={captureEmailHandler}
+              keyboardType="email-address"
             />
           </View>
           <View>
             <Text style={[textcolor, styles.inputlables]}>Password </Text>
             <TextInput
               placeholderTextColor={" #808080"}
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter password"
-              value={userdata.userpassword}
+              value={userdata.password}
               onChangeText={capturePassowrdHandler}
               secureTextEntry={true}
             />
@@ -143,6 +143,8 @@ export default function UserSignupscreen({ navigation }) {
             <Pressable onPress={signUpHandler} style={[styles.loginbutton]}>
               <Text style={[textcolor]}>Sign up</Text>
             </Pressable>
+            {/* <Text style={[textcolor]}>Name : {userdata.firstname} </Text> */}
+            {/* <Text style={[textcolor]}>Greetings</Text> */}
           </View>
 
           <View style={[styles.endingsection]}>
@@ -153,7 +155,6 @@ export default function UserSignupscreen({ navigation }) {
             >
               <Text style={[textcolor]}>Log in</Text>
             </Pressable>
-            {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
           </View>
         </View>
       </View>
