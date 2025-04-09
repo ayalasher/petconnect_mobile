@@ -5,6 +5,8 @@ import {
   TextInput,
   Pressable,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -54,49 +56,54 @@ export default function UserLoginscreen({ navigation }) {
   }
 
   return (
-    <View style={[styles.screencontainer, screencolor]}>
-      <View style={[styles.loginFormcontainer]}>
-        <Text style={[textcolor, styles.headertext]}>
-          Log in as a service or Product provider
-        </Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior based on platform
+      style={{ flex: 1 }}
+    >
+      <View style={[styles.screencontainer, screencolor]}>
+        <View style={[styles.loginFormcontainer]}>
+          <Text style={[textcolor, styles.headertext]}>
+            Log in as a service or Product provider
+          </Text>
 
-        <View>
-          <Text style={[textcolor, styles.inputlables]}> Email </Text>
-          <TextInput
-            style={[styles.textinputs]}
-            placeholder="Enter establishment email"
-            value={sppdata.estemail}
-            onChangeText={captureEmailhandler}
-          />
-        </View>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput
-            value={sppdata.estpassword}
-            style={[styles.textinputs]}
-            placeholder="Enter password"
-            onChangeText={capturePasswordhandler}
-          />
-        </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}> Email </Text>
+            <TextInput
+              style={[styles.textinputs]}
+              placeholder="Enter establishment email"
+              value={sppdata.estemail}
+              onChangeText={captureEmailhandler}
+            />
+          </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Password </Text>
+            <TextInput
+              value={sppdata.estpassword}
+              style={[styles.textinputs]}
+              placeholder="Enter password"
+              onChangeText={capturePasswordhandler}
+            />
+          </View>
 
-        <View>
-          <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
-            <Text style={[textcolor]}>Log in</Text>
-          </Pressable>
-        </View>
+          <View>
+            <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
+              <Text style={[textcolor]}>Log in</Text>
+            </Pressable>
+          </View>
 
-        <View style={[styles.endingsection]}>
-          <Text style={[textcolor]}>Haven an account ? </Text>
-          <Pressable
-            style={[styles.toSignupButton]}
-            onPress={navigateToUSerSignput}
-          >
-            <Text style={[textcolor]}>Sign up</Text>
-          </Pressable>
-          {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          <View style={[styles.endingsection]}>
+            <Text style={[textcolor]}>Haven an account ? </Text>
+            <Pressable
+              style={[styles.toSignupButton]}
+              onPress={navigateToUSerSignput}
+            >
+              <Text style={[textcolor]}>Sign up</Text>
+            </Pressable>
+            {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

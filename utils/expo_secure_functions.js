@@ -34,3 +34,11 @@ export const removeUserData = async () => {
     console.log("Error removing user data:", error);
   }
 };
+
+// Below is a template we are going to use with the logout function to remove data from the secure-store
+// import { removeUserData } from '../../utils/secureStorage';
+
+// const handleLogout = async () => {
+//   await removeUserData();
+//   navigation.navigate('Laucnh'); // Navigate back to launch screen
+// };

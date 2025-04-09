@@ -1,4 +1,12 @@
-import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
@@ -55,64 +63,69 @@ export default function UserSignupscreen({ navigation }) {
   }
 
   return (
-    <View style={[styles.screencontainer, screencolor]}>
-      <View style={[styles.loginContainer]}>
-        <Text style={[textcolor, styles.headertext]}>
-          Sign up a service or Product provider{" "}
-        </Text>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Name</Text>
-          <TextInput
-            style={[styles.textinputs]}
-            placeholder="Enter establishment name"
-            value={sppdata.estname}
-            onChangeText={captureNamehandler}
-          />
-        </View>
-        {/* <View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior based on platform
+      style={{ flex: 1 }}
+    >
+      <View style={[styles.screencontainer, screencolor]}>
+        <View style={[styles.loginContainer]}>
+          <Text style={[textcolor, styles.headertext]}>
+            Sign up a service or Product provider{" "}
+          </Text>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Name</Text>
+            <TextInput
+              style={[styles.textinputs]}
+              placeholder="Enter establishment name"
+              value={sppdata.estname}
+              onChangeText={captureNamehandler}
+            />
+          </View>
+          {/* <View>
           <Text style={[textcolor, styles.inputlables]}>Last name </Text>
           <TextInput
             style={[styles.textinputs]}
             placeholder="Enter last name"
           />
         </View> */}
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Email </Text>
-          <TextInput
-            style={[styles.textinputs]}
-            placeholder="Enter establishment email"
-            value={sppdata.estemail}
-            onChangeText={captureEmailhandler}
-          />
-        </View>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput
-            value={sppdata.estpassword}
-            style={[styles.textinputs]}
-            placeholder="Enter password"
-            onChangeText={capturePasswordhandler}
-          />
-        </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Email </Text>
+            <TextInput
+              style={[styles.textinputs]}
+              placeholder="Enter establishment email"
+              value={sppdata.estemail}
+              onChangeText={captureEmailhandler}
+            />
+          </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Password </Text>
+            <TextInput
+              value={sppdata.estpassword}
+              style={[styles.textinputs]}
+              placeholder="Enter password"
+              onChangeText={capturePasswordhandler}
+            />
+          </View>
 
-        <View>
-          <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
-            <Text style={[textcolor]}>Sign up</Text>
-          </Pressable>
-        </View>
+          <View>
+            <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
+              <Text style={[textcolor]}>Sign up</Text>
+            </Pressable>
+          </View>
 
-        <View style={[styles.endingsection]}>
-          <Text style={[textcolor]}>Already have an account ? </Text>
-          <Pressable
-            style={[styles.toSignupButton]}
-            onPress={navigatetospplogin}
-          >
-            <Text style={[textcolor]}>Log in</Text>
-          </Pressable>
-          {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          <View style={[styles.endingsection]}>
+            <Text style={[textcolor]}>Already have an account ? </Text>
+            <Pressable
+              style={[styles.toSignupButton]}
+              onPress={navigatetospplogin}
+            >
+              <Text style={[textcolor]}>Log in</Text>
+            </Pressable>
+            {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

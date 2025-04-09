@@ -6,6 +6,8 @@ import {
   TextInput,
   Pressable,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -27,24 +29,43 @@ export default function UserLoginscreen({ navigation }) {
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
 
   function navigateToUSerSignput() {
+    console.log("error");
+
     // alert("Button testing");
+    alert("error");
     navigation.navigate("User sign up  screen");
   }
 
   async function loginHandler() {
-    // route is set to localhost for testing purposes
-    const response = await axios.post(
-      "http://localhost:3000/backend/userLogin",
-      userdata,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(response.data);
-
     try {
+      // route is set to localhost for testing purposes
+      const response = await axios.post(
+        "http://localhost:3000/backend/userLogin",
+        userdata,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response.data);
+      if (response.data) {
+        // Save user data securely
+        await SecureStore.setItemAsync("userToken", response.data.token);
+        await SecureStore.setItemAsync(
+          "userData",
+          JSON.stringify(response.data.user)
+        );
+
+        setUserdata({
+          useremail: "",
+          userPassword: "",
+        });
+
+        // Navigate to home screen
+        navigation.navigate("User bottom tab screens");
+      }
     } catch (error) {
       console.log(`Error:${error}`);
     }
@@ -59,49 +80,55 @@ export default function UserLoginscreen({ navigation }) {
   }
 
   return (
-    <View style={[styles.screencontainer, screencolor]}>
-      <View style={[styles.loginFormcontainer]}>
-        <Text style={[textcolor, styles.headertext]}>Log in</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior based on platform
+      style={{ flex: 1 }}
+    >
+      <View style={[styles.screencontainer, screencolor]}>
+        <View style={[styles.loginFormcontainer]}>
+          <Text style={[textcolor, styles.headertext]}>Log in</Text>
 
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Email </Text>
-          <TextInput
-            placeholderTextColor={" #808080"}
-            style={[styles.textinputs]}
-            placeholder="Enter email"
-            value={userdata.useremail}
-            onChangeText={captureEmailHanlder}
-          />
-        </View>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput
-            placeholderTextColor={" #808080"}
-            style={[styles.textinputs]}
-            placeholder="Enter password"
-            value={userdata.userPassword}
-            onChangeText={capturePassowrdHandler}
-          />
-        </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Email </Text>
+            <TextInput
+              placeholderTextColor={" #808080"}
+              style={[styles.textinputs]}
+              placeholder="Enter email"
+              value={userdata.useremail}
+              onChangeText={captureEmailHanlder}
+            />
+          </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Password </Text>
+            <TextInput
+              placeholderTextColor={" #808080"}
+              style={[styles.textinputs]}
+              placeholder="Enter password"
+              value={userdata.userPassword}
+              onChangeText={capturePassowrdHandler}
+              secureTextEntry={true}
+            />
+          </View>
 
-        <View>
-          <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
-            <Text style={[textcolor]}>Log in</Text>
-          </Pressable>
-        </View>
+          <View>
+            <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
+              <Text style={[textcolor]}>Log in</Text>
+            </Pressable>
+          </View>
 
-        <View style={[styles.endingsection]}>
-          <Text style={[textcolor]}>Haven an account ? </Text>
-          <Pressable
-            style={[styles.toSignupButton]}
-            onPress={navigateToUSerSignput}
-          >
-            <Text style={[textcolor]}>Sign up</Text>
-          </Pressable>
-          {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          <View style={[styles.endingsection]}>
+            <Text style={[textcolor]}>Haven an account ? </Text>
+            <Pressable
+              style={[styles.toSignupButton]}
+              onPress={navigateToUSerSignput}
+            >
+              <Text style={[textcolor]}>Sign up</Text>
+            </Pressable>
+            {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

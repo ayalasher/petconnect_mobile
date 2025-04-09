@@ -1,9 +1,17 @@
-import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
-
+import * as SecureStore from "expo-secure-store";
 export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const navigator = useNavigation();
@@ -38,6 +46,26 @@ export default function UserSignupscreen({ navigation }) {
           },
         }
       );
+
+      if (response.data) {
+        // Save user data securely
+        await SecureStore.setItemAsync("userToken", response.data.token);
+        await SecureStore.setItemAsync(
+          "userData",
+          JSON.stringify(response.data.user)
+        );
+
+        setUserdata({
+          firstname: "",
+          lastname: "",
+          userpassword: "",
+          useremail: "",
+        });
+
+        // Navigate to home screen
+        navigation.navigate("User bottom tab screens");
+      }
+
       console.log(response.data);
     } catch (error) {
       console.log(`Error:${error}`);
@@ -61,68 +89,75 @@ export default function UserSignupscreen({ navigation }) {
   }
 
   return (
-    <View style={[styles.screencontainer, screencolor]}>
-      <View style={[styles.loginContainer]}>
-        <Text style={[textcolor, styles.headertext]}>Sign up </Text>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>First name</Text>
-          <TextInput
-            placeholderTextColor={" #808080"}
-            style={[styles.textinputs]}
-            placeholder="Enter first name"
-            value={userdata.firstname}
-            onChangeText={captureFirstnameHandler}
-          />
-        </View>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Last name </Text>
-          <TextInput
-            placeholderTextColor={" #808080"}
-            style={[styles.textinputs]}
-            placeholder="Enter last name"
-            value={userdata.lastname}
-            onChangeText={captureLastnameHandler}
-          />
-        </View>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Email </Text>
-          <TextInput
-            placeholderTextColor={" #808080"}
-            style={[styles.textinputs]}
-            placeholder="Enter email"
-            value={userdata.useremail}
-            onChangeText={captureEmailHandler}
-          />
-        </View>
-        <View>
-          <Text style={[textcolor, styles.inputlables]}>Password </Text>
-          <TextInput
-            placeholderTextColor={" #808080"}
-            style={[styles.textinputs]}
-            placeholder="Enter password"
-            value={userdata.userpassword}
-            onChangeText={capturePassowrdHandler}
-          />
-        </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior based on platform
+      style={{ flex: 1 }}
+    >
+      <View style={[styles.screencontainer, screencolor]}>
+        <View style={[styles.loginContainer]}>
+          <Text style={[textcolor, styles.headertext]}>Sign up </Text>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>First name</Text>
+            <TextInput
+              placeholderTextColor={" #808080"}
+              style={[styles.textinputs]}
+              placeholder="Enter first name"
+              value={userdata.firstname}
+              onChangeText={captureFirstnameHandler}
+            />
+          </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Last name </Text>
+            <TextInput
+              placeholderTextColor={" #808080"}
+              style={[styles.textinputs]}
+              placeholder="Enter last name"
+              value={userdata.lastname}
+              onChangeText={captureLastnameHandler}
+            />
+          </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Email </Text>
+            <TextInput
+              keyboardType="password"
+              placeholderTextColor={" #808080"}
+              style={[styles.textinputs]}
+              placeholder="Enter email"
+              value={userdata.useremail}
+              onChangeText={captureEmailHandler}
+            />
+          </View>
+          <View>
+            <Text style={[textcolor, styles.inputlables]}>Password </Text>
+            <TextInput
+              placeholderTextColor={" #808080"}
+              style={[styles.textinputs]}
+              placeholder="Enter password"
+              value={userdata.userpassword}
+              onChangeText={capturePassowrdHandler}
+              secureTextEntry={true}
+            />
+          </View>
 
-        <View>
-          <Pressable onPress={signUpHandler} style={[styles.loginbutton]}>
-            <Text style={[textcolor]}>Sign up</Text>
-          </Pressable>
-        </View>
+          <View>
+            <Pressable onPress={signUpHandler} style={[styles.loginbutton]}>
+              <Text style={[textcolor]}>Sign up</Text>
+            </Pressable>
+          </View>
 
-        <View style={[styles.endingsection]}>
-          <Text style={[textcolor]}>Already have an account ? </Text>
-          <Pressable
-            style={[styles.toSignupButton]}
-            onPress={navigateToUSerlogin}
-          >
-            <Text style={[textcolor]}>Log in</Text>
-          </Pressable>
-          {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          <View style={[styles.endingsection]}>
+            <Text style={[textcolor]}>Already have an account ? </Text>
+            <Pressable
+              style={[styles.toSignupButton]}
+              onPress={navigateToUSerlogin}
+            >
+              <Text style={[textcolor]}>Log in</Text>
+            </Pressable>
+            {/* <TextInput style={[styles.textinputs]} placeholder="Enter password" /> */}
+          </View>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
