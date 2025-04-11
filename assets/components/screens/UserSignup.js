@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import { storeUserData } from "../../../utils/expo_secure_functions";
 export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const navigator = useNavigation();
@@ -46,14 +47,23 @@ export default function UserSignupscreen({ navigation }) {
           },
         }
       );
+      console.log(`Outside expo-secure section.`);
+      console.log(response.data);
 
       if (response.data) {
         // Save user data securely
+        console.log(`Inside the expo secure store `);
+
+        const userJsonData = JSON.stringify(response.data);
+
         await SecureStore.setItemAsync("userToken", response.data.token);
-        await SecureStore.setItemAsync(
-          "userData",
-          JSON.stringify(response.data.user)
-        );
+        await storeUserData(response.data);
+        // await SecureStore.setItemAsync(
+        //   "userData",
+        //   JSON.stringify(response.data.user)
+        // );
+
+        console.log(`After the expo secure.`);
 
         setUserdata({
           firstName: "",

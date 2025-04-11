@@ -1,10 +1,21 @@
 import * as SecureStore from "expo-secure-store";
-import { useNavigation } from "@react-navigation/native";
 
 //Storing user data
 // On login or signup
 export const storeUserData = async (userData) => {
   try {
+    // Checking if the userData being received is already astring
+    if (typeof userData === "string") {
+      console.log(`User data  is already a string`);
+    }
+
+    if (typeof userData === "object") {
+      console.log(`The user data is an object.`);
+    }
+
+    if (typeof userData === "undefined") {
+      console.log(`userData data type is undefined`);
+    }
     // In this context, "userData" is the key while "JSON.stringify(userData)" is the value
     await SecureStore.setItemAsync("userData", JSON.stringify(userData));
   } catch (error) {
