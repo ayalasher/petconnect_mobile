@@ -16,8 +16,8 @@ export default function UserLoginscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
 
   const [userdata, setUserdata] = useState({
-    useremail: "",
-    userPassword: "",
+    userEmail: "",
+    password: "",
   });
 
   const screencolor =
@@ -33,12 +33,16 @@ export default function UserLoginscreen({ navigation }) {
   }
 
   async function loginHandler() {
+    // console.log(`Before the try`);
     try {
       // route is set to localhost for testing purposes
+      console.log(`Inside the try`);
+
       const response = await axios.post(
-        "192.168.100.10:3000/backend/userLogin",
+        "http://192.168.100.10:3000/backend/userLogin",
         userdata,
         {
+          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
@@ -55,8 +59,8 @@ export default function UserLoginscreen({ navigation }) {
         );
 
         setUserdata({
-          useremail: "",
-          userPassword: "",
+          userEmail: "",
+          password: "",
         });
 
         // Navigate to home screen
@@ -68,11 +72,11 @@ export default function UserLoginscreen({ navigation }) {
   }
 
   function captureEmailHanlder(userEnteredEmail) {
-    setUserdata({ ...userdata, useremail: userEnteredEmail });
+    setUserdata({ ...userdata, userEmail: userEnteredEmail });
   }
 
   function capturePassowrdHandler(userEnteredPassword) {
-    setUserdata({ ...userdata, userPassword: userEnteredPassword });
+    setUserdata({ ...userdata, password: userEnteredPassword });
   }
 
   return (
@@ -90,7 +94,7 @@ export default function UserLoginscreen({ navigation }) {
               placeholderTextColor={" #808080"}
               style={[styles.textinputs, textcolor]}
               placeholder="Enter email"
-              value={userdata.useremail}
+              value={userdata.userEmail}
               onChangeText={captureEmailHanlder}
               keyboardType="email-address"
             />
@@ -101,7 +105,7 @@ export default function UserLoginscreen({ navigation }) {
               placeholderTextColor={" #808080"}
               style={[styles.textinputs, textcolor]}
               placeholder="Enter password"
-              value={userdata.userPassword}
+              value={userdata.password}
               onChangeText={capturePassowrdHandler}
               secureTextEntry={true}
             />
@@ -116,7 +120,13 @@ export default function UserLoginscreen({ navigation }) {
           <View style={[styles.endingsection]}>
             <Text style={[textcolor]}>Haven an account ? </Text>
             <Pressable
-              style={[styles.toSignupButton]}
+              style={[
+                styles.toSignupButton,
+                ({ pressed }) =>
+                  pressed
+                    ? styles.toSignupButton && styles.btnopacity
+                    : styles.toSignupButton,
+              ]}
               onPress={navigateToUSerSignput}
             >
               <Text style={[textcolor]}>Sign up</Text>
@@ -157,6 +167,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // From bottom to top
     justifyContent: "center",
+  },
+  btnopacity: {
+    opacity: 0.3,
   },
 
   headertext: {

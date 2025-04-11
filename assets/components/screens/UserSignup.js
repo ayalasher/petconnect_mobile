@@ -36,44 +36,42 @@ export default function UserSignupscreen({ navigation }) {
   }
 
   async function signUpHandler() {
-    navigation.navigate("User bottom tab screens");
-    // alert("Testing the navigation");
-    // try {
-    //   let response = await axios.post(
-    //     "http://192.168.100.10:3000/backend/userSignUp/",
-    //     userdata,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
+    try {
+      let response = await axios.post(
+        "http://192.168.100.10:3000/backend/userSignUp/",
+        userdata,
+        {
+          headers: {
+            "Content-Type": "Application/json",
+          },
+        }
+      );
 
-    //   if (response.data) {
-    //     // Save user data securely
-    //     await SecureStore.setItemAsync("userToken", response.data.token);
-    //     await SecureStore.setItemAsync(
-    //       "userData",
-    //       JSON.stringify(response.data.user)
-    //     );
+      if (response.data) {
+        // Save user data securely
+        await SecureStore.setItemAsync("userToken", response.data.token);
+        await SecureStore.setItemAsync(
+          "userData",
+          JSON.stringify(response.data.user)
+        );
 
-    //     setUserdata({
-    //       firstName: "",
-    //       lastName: "",
-    //       password: "",
-    //       userEmail: "",
-    //     });
+        setUserdata({
+          firstName: "",
+          lastName: "",
+          password: "",
+          userEmail: "",
+        });
 
-    //     // Navigate to home screen
-    //     console.log(`Flow successful`);
+        // Navigate to home screen
+        console.log(`Flow successful`);
 
-    //     navigation.navigate("User bottom tab screens");
-    //   }
+        navigation.navigate("User bottom tab screens");
+      }
 
-    //   console.log(response.data);
-    // } catch (error) {
-    //   console.log(`Error:${error}`);
-    // }
+      console.log(response.data);
+    } catch (error) {
+      console.log(`Error:${error}`);
+    }
   }
 
   function captureFirstnameHandler(userProvidefirstname) {
