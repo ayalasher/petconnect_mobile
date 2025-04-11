@@ -1,7 +1,7 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 
-export default function Userproductscreen() {
+export default function Usersearchscreen() {
   const userTheme = useSelector((state) => state.userTheme);
 
   const screencolor =
@@ -13,7 +13,7 @@ export default function Userproductscreen() {
     userTheme === "dark" ? styles.darkmodeTextcolor : styles.lightmodeTextcolor;
   return (
     <View style={[styles.container, screencolor]}>
-      <Text style={[textcolor]}>User products screen</Text>
+      <Text style={[textcolor]}> Search screen</Text>
     </View>
   );
 }

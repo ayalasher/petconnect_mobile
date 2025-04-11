@@ -23,6 +23,11 @@ import UserSettigsandlogoutScreen from "./assets/components/screens/UserSettings
 import SpplistedEditing from "./assets/components/screens/SpplistedEditing";
 import SpplistedDeleting from "./assets/components/screens/SppListeddeleting";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import Feather from "@expo/vector-icons/Feather";
+import Usersearchscreen from "./assets/components/screens/Usersearchscreen";
+import UserservicesScreen from "./assets/components/screens/Userservicesscreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -70,25 +75,61 @@ export default function App() {
         <Tab.Screen
           name=" User Home screen "
           component={Userhomescreen}
-          options={{ headerShown: false, title: "Home" , tabBarIcon}}
+          options={{
+            headerShown: false,
+            title: "Home",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome5 name="home" size={size} color={color} />
+            ),
+          }}
         />
 
         <Tab.Screen
           name=" User products screen "
           component={Userproductscreen}
-          options={{ headerShown: false, title: "Products" }}
+          options={{
+            headerShown: false,
+            title: "Products",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome name="product-hunt" size={size} color={color} />
+            ),
+          }}
         />
 
         <Tab.Screen
           name=" User services screen "
-          component={Userproductscreen}
-          options={{ headerShown: false, title: "Services" }}
+          component={UserservicesScreen}
+          options={{
+            headerShown: false,
+            title: "Services",
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="customerservice" size={size} color={color} />
+            ),
+          }}
         />
 
         <Tab.Screen
           name=" User chats screen "
           component={UserChatsScreen}
-          options={{ headerShown: false, title: "Chats" }}
+          options={{
+            headerShown: false,
+            title: "Chats",
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="message-circle" size={size} color={color} />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name=" User search screen "
+          component={Usersearchscreen}
+          options={{
+            headerShown: false,
+            title: "Search",
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="search1" size={size} color={color} />
+            ),
+          }}
         />
       </Tab.Navigator>
     );
