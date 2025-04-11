@@ -56,7 +56,7 @@ export default function UserSignupscreen({ navigation }) {
 
         const userJsonData = JSON.stringify(response.data);
 
-        await SecureStore.setItemAsync("userToken", response.data.token);
+        // await SecureStore.setItemAsync("userToken", response.data.token);
         await storeUserData(response.data);
         // await SecureStore.setItemAsync(
         //   "userData",
