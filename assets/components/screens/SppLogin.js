@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { storeUserData } from "../../../utils/expo_secure_functions";
 import { useState } from "react";
 
 export default function UserLoginscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const [sppdata, setSppdata] = useState({
-    estemail: "",
-    estpassword: "",
+    establishmentEmail: "",
+    establishmentPassword: "",
   });
 
   const screencolor =
@@ -34,7 +35,7 @@ export default function UserLoginscreen({ navigation }) {
   async function loginHandler() {
     try {
       let response = await axios.post(
-        "http://localhost:3000/backend/loginForServiceAndProductProviders",
+        "http://192.168.100.10:3000/backend/loginForServiceAndProductProviders",
         sppdata,
         {
           headers: {
@@ -43,16 +44,27 @@ export default function UserLoginscreen({ navigation }) {
         }
       );
       console.log(response.data);
+      if (response.data) {
+        await storeUserData(response.data);
+
+        setSppdata({
+          establishmentEmail: "",
+          establishmentPassword: "",
+        });
+
+        // Navigate to home screen
+        navigation.navigate("SPP bottom tab screens");
+      }
     } catch (error) {
       console.log(`Error:${error}`);
     }
   }
 
   function captureEmailhandler(sppProvidedEmail) {
-    setSppdata({ ...sppdata, estemail: sppProvidedEmail });
+    setSppdata({ ...sppdata, establishmentEmail: sppProvidedEmail });
   }
   function capturePasswordhandler(sppProvidedPassword) {
-    setSppdata({ ...sppdata, estpassword: sppProvidedPassword });
+    setSppdata({ ...sppdata, establishmentPassword: sppProvidedPassword });
   }
 
   return (
@@ -69,19 +81,21 @@ export default function UserLoginscreen({ navigation }) {
           <View>
             <Text style={[textcolor, styles.inputlables]}> Email </Text>
             <TextInput
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter establishment email"
-              value={sppdata.estemail}
+              value={sppdata.establishmentEmail}
               onChangeText={captureEmailhandler}
+              keyboardType="email-address"
             />
           </View>
           <View>
             <Text style={[textcolor, styles.inputlables]}>Password </Text>
             <TextInput
-              value={sppdata.estpassword}
-              style={[styles.textinputs]}
+              value={sppdata.establishmentPassword}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter password"
               onChangeText={capturePasswordhandler}
+              secureTextEntry={true}
             />
           </View>
 

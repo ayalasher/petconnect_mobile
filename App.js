@@ -153,19 +153,19 @@ export default function App() {
         <Tab.Screen
           name=" SPP home screen "
           component={SppHomeScreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         <Tab.Screen
           name=" SPP listed screen "
           component={Spplisted}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         <Tab.Screen
           name=" SPP add product or service screen "
           component={SppaddproductOrService}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         {/* Purpose of the screen to be reviewed */}
@@ -173,20 +173,20 @@ export default function App() {
         <Tab.Screen
           name=" SPP search  screen "
           component={Sppsearch}
-          options={{}}
+          options={{ headerShown: false }}
         />
 
         <Tab.Screen
           name=" SPP chat screen "
           component={SppChatScreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
-
+        {/* 
         <Tab.Screen
           name=" SPP add product or service screen "
           component={SppaddproductOrService}
           options={{}}
-        />
+        /> */}
       </Tab.Navigator>
     );
   }

@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 
-
 export default function Userhomescreen({ navigation }) {
   // const dispatch = useDispatch();
   const userTheme = useSelector((state) => state.userTheme);

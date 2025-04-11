@@ -11,14 +11,15 @@ import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import axios from "axios";
+import { storeUserData } from "../../../utils/expo_secure_functions";
 
 export default function UserSignupscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
   const navigator = useNavigation();
   const [sppdata, setSppdata] = useState({
-    estname: "",
-    estemail: "",
-    estpassword: "",
+    establishmentName: "",
+    establishmentEmail: "",
+    password: "",
   });
 
   const screencolor =
@@ -33,10 +34,10 @@ export default function UserSignupscreen({ navigation }) {
     navigator.goBack();
   }
 
-  function loginHandler() {
+  async function signUphandler() {
     try {
-      let response = axios.post(
-        "http://localhost:3000/backend/SignUpForServiceAndProductProviders",
+      let response = await axios.post(
+        "http://192.168.100.10:3000/backend/SignUpForServiceAndProductProviders",
         sppdata,
         {
           headers: {
@@ -45,21 +46,47 @@ export default function UserSignupscreen({ navigation }) {
         }
       );
       console.log(response.data);
+      if (response.data) {
+        // Save user data securely
+        console.log(`Inside the expo secure store `);
+
+        const userJsonData = JSON.stringify(response.data);
+
+        // await SecureStore.setItemAsync("userToken", response.data.token);
+        await storeUserData(response.data);
+        // await SecureStore.setItemAsync(
+        //   "userData",
+        //   JSON.stringify(response.data.user)
+        // );
+
+        console.log(`After the expo secure.`);
+
+        setSppdata({
+          establishmentName: "",
+          establishmentEmail: "",
+          password: "",
+        });
+
+        // Navigate to home screen
+        console.log(`Flow successful`);
+
+        navigation.navigate("SPP bottom tab screens");
+      }
     } catch (error) {
       console.log(`Error:$${error}`);
     }
   }
 
   function captureNamehandler(sppProvidedName) {
-    setSppdata({ ...sppdata, estname: sppProvidedName });
+    setSppdata({ ...sppdata, establishmentName: sppProvidedName });
   }
 
   function captureEmailhandler(sppProvidedemail) {
-    setSppdata({ ...sppdata, estemail: sppProvidedemail });
+    setSppdata({ ...sppdata, establishmentEmail: sppProvidedemail });
   }
 
   function capturePasswordhandler(sppProvidedPassowrd) {
-    setSppdata({ ...sppdata, estpassword: sppProvidedPassowrd });
+    setSppdata({ ...sppdata, password: sppProvidedPassowrd });
   }
 
   return (
@@ -75,10 +102,11 @@ export default function UserSignupscreen({ navigation }) {
           <View>
             <Text style={[textcolor, styles.inputlables]}>Name</Text>
             <TextInput
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter establishment name"
-              value={sppdata.estname}
+              value={sppdata.establishmentName}
               onChangeText={captureNamehandler}
+              keyboardType="default"
             />
           </View>
           {/* <View>
@@ -91,24 +119,26 @@ export default function UserSignupscreen({ navigation }) {
           <View>
             <Text style={[textcolor, styles.inputlables]}>Email </Text>
             <TextInput
-              style={[styles.textinputs]}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter establishment email"
-              value={sppdata.estemail}
+              value={sppdata.establishmentEmail}
               onChangeText={captureEmailhandler}
+              keyboardType="email-address"
             />
           </View>
           <View>
             <Text style={[textcolor, styles.inputlables]}>Password </Text>
             <TextInput
-              value={sppdata.estpassword}
-              style={[styles.textinputs]}
+              value={sppdata.password}
+              style={[styles.textinputs, textcolor]}
               placeholder="Enter password"
               onChangeText={capturePasswordhandler}
+              secureTextEntry={true}
             />
           </View>
 
           <View>
-            <Pressable onPress={loginHandler} style={[styles.loginbutton]}>
+            <Pressable onPress={signUphandler} style={[styles.loginbutton]}>
               <Text style={[textcolor]}>Sign up</Text>
             </Pressable>
           </View>
