@@ -36,40 +36,44 @@ export default function UserSignupscreen({ navigation }) {
   }
 
   async function signUpHandler() {
-    try {
-      let response = await axios.post(
-        "http://192.168.100.10:3000/backend/userSignUp/",
-        userdata,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    navigation.navigate("User bottom tab screens");
+    // alert("Testing the navigation");
+    // try {
+    //   let response = await axios.post(
+    //     "http://192.168.100.10:3000/backend/userSignUp/",
+    //     userdata,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
 
-      if (response.data) {
-        // Save user data securely
-        await SecureStore.setItemAsync("userToken", response.data.token);
-        await SecureStore.setItemAsync(
-          "userData",
-          JSON.stringify(response.data.user)
-        );
+    //   if (response.data) {
+    //     // Save user data securely
+    //     await SecureStore.setItemAsync("userToken", response.data.token);
+    //     await SecureStore.setItemAsync(
+    //       "userData",
+    //       JSON.stringify(response.data.user)
+    //     );
 
-        setUserdata({
-          firstName: "",
-          lastName: "",
-          password: "",
-          userEmail: "",
-        });
+    //     setUserdata({
+    //       firstName: "",
+    //       lastName: "",
+    //       password: "",
+    //       userEmail: "",
+    //     });
 
-        // Navigate to home screen
-        navigation.navigate("User bottom tab screens");
-      }
+    //     // Navigate to home screen
+    //     console.log(`Flow successful`);
 
-      console.log(response.data);
-    } catch (error) {
-      console.log(`Error:${error}`);
-    }
+    //     navigation.navigate("User bottom tab screens");
+    //   }
+
+    //   console.log(response.data);
+    // } catch (error) {
+    //   console.log(`Error:${error}`);
+    // }
   }
 
   function captureFirstnameHandler(userProvidefirstname) {

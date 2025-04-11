@@ -22,6 +22,7 @@ import SppChatScreen from "./assets/components/screens/Sppchat";
 import UserSettigsandlogoutScreen from "./assets/components/screens/UserSettingsandlogout";
 import SpplistedEditing from "./assets/components/screens/SpplistedEditing";
 import SpplistedDeleting from "./assets/components/screens/SppListeddeleting";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -69,25 +70,25 @@ export default function App() {
         <Tab.Screen
           name=" User Home screen "
           component={Userhomescreen}
-          options={{}}
+          options={{ headerShown: false, title: "Home" , tabBarIcon}}
         />
 
         <Tab.Screen
           name=" User products screen "
           component={Userproductscreen}
-          options={{}}
+          options={{ headerShown: false, title: "Products" }}
         />
 
         <Tab.Screen
           name=" User services screen "
           component={Userproductscreen}
-          options={{}}
+          options={{ headerShown: false, title: "Services" }}
         />
 
         <Tab.Screen
           name=" User chats screen "
           component={UserChatsScreen}
-          options={{}}
+          options={{ headerShown: false, title: "Chats" }}
         />
       </Tab.Navigator>
     );
