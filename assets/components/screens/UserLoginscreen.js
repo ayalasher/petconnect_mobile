@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { storeUserData } from "../../../utils/expo_secure_functions";
 
 export default function UserLoginscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
@@ -51,12 +52,7 @@ export default function UserLoginscreen({ navigation }) {
 
       console.log(response.data);
       if (response.data) {
-        // Save user data securely
-        await SecureStore.setItemAsync("userToken", response.data.token);
-        await SecureStore.setItemAsync(
-          "userData",
-          JSON.stringify(response.data.user)
-        );
+        await storeUserData(response.data);
 
         setUserdata({
           userEmail: "",
