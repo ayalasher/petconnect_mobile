@@ -10,9 +10,11 @@ import {
 } from "react-native";
 import { updateUserTheme } from "../../redux/Store";
 import { useSelector, useDispatch } from "react-redux";
+import { getUserData } from "../../../utils/expo_secure_functions";
 
 export default function LaunchScreen({ navigation }) {
   const [isauthenticated, setIsauthenticated] = useState(false);
+  const [userdata, setUserData] = useState(null);
 
   const dispatch = useDispatch();
   const userTheme = useSelector((state) => state.userTheme);
@@ -36,17 +38,33 @@ export default function LaunchScreen({ navigation }) {
     dispatch(updateUserTheme(colorScheme));
   }, [colorScheme]);
 
+  useEffect(() => {
+    const checkUserAuth = async () => {
+      try {
+        const datafetching = await getUserData();
+        setUserData(datafetching);
+        console.log(userdata);
+        if (datafetching !== null) {
+          // User is authenticated
+          setIsauthenticated(true);
+          navigation.navigate("User bottom tab screens");
+        } else {
+          // No valid user data found
+          setIsauthenticated(false);
+          navigation.navigate("Auth as user or SPP");
+        }
+      } catch (error) {
+        console.error("Error checking auth:", error);
+        setIsauthenticated(false);
+        navigation.navigate("Auth as user or SPP");
+      }
+    };
+    checkUserAuth();
+  }, []);
+
   return (
     <View style={[styles.container, screencolor]}>
-      <Text style={[textcolor]}>react native hoyee!!!</Text>
-      <Text style={[textcolor]}>
-        {userTheme === "dark" ? "Dark theme " : "light theme"}
-      </Text>
       <ActivityIndicator size="large" />
-
-      <Pressable onPress={navigationTesting} style={[styles.buttonTeststyles]}>
-        <Text>Navigation testing</Text>
-      </Pressable>
     </View>
   );
 }
