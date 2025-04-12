@@ -28,6 +28,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Feather from "@expo/vector-icons/Feather";
 import Usersearchscreen from "./assets/components/screens/Usersearchscreen";
 import UserservicesScreen from "./assets/components/screens/Userservicesscreen";
+import Entypo from "@expo/vector-icons/Entypo";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -141,7 +142,7 @@ export default function App() {
         <Stack.Screen
           name="User Settings and logout screen"
           component={UserSettigsandlogoutScreen}
-          options={{}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     );
@@ -153,19 +154,37 @@ export default function App() {
         <Tab.Screen
           name=" SPP home screen "
           component={SppHomeScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            title: "Home",
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome5 name="home" size={size} color={color} />
+            ),
+          }}
         />
 
         <Tab.Screen
           name=" SPP listed screen "
           component={Spplisted}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            title: "Listed ",
+            tabBarIcon: ({ color, size }) => (
+              <Entypo name="list" size={size} color={color} />
+            ),
+          }}
         />
 
         <Tab.Screen
           name=" SPP add product or service screen "
           component={SppaddproductOrService}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            title: "Add",
+            tabBarIcon: ({ color, size }) => (
+              <Entypo name="add-to-list" size={size} color={color} />
+            ),
+          }}
         />
 
         {/* Purpose of the screen to be reviewed */}
@@ -173,13 +192,25 @@ export default function App() {
         <Tab.Screen
           name=" SPP search  screen "
           component={Sppsearch}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            title: "Search",
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="search1" size={size} color={color} />
+            ),
+          }}
         />
 
         <Tab.Screen
           name=" SPP chat screen "
           component={SppChatScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            title: "Chat",
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="message-circle" size={size} color={color} />
+            ),
+          }}
         />
         {/* 
         <Tab.Screen
