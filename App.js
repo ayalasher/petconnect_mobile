@@ -29,6 +29,7 @@ import Feather from "@expo/vector-icons/Feather";
 import Usersearchscreen from "./assets/components/screens/Usersearchscreen";
 import UserservicesScreen from "./assets/components/screens/Userservicesscreen";
 import Entypo from "@expo/vector-icons/Entypo";
+import Loginorsignupuserandspp from "./assets/components/screens/Loginorsignupuserandspp";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -283,6 +284,12 @@ export default function App() {
             name="Spp listed and deleted screens"
             options={{ headerShown: false, title: "User screens" }}
             component={SpplitsedDeletingAndEditingScreens}
+          />
+
+          <Stack.Screen
+            name="Auth as user or SPP"
+            options={{ headerShown: false, title: "Test screen" }}
+            component={Loginorsignupuserandspp}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />
