@@ -10,11 +10,23 @@ const userthemeSlice = createSlice({
   },
 });
 
+const userDataslice = createSlice({
+  name: "userData",
+  initialState: {},
+  reducers: {
+    updateUserData: (state, action) => {
+      return action.payload;
+    },
+  },
+});
+
 export const { updateUserTheme } = userthemeSlice.actions;
+export const { updateUserData } = userDataslice.actions;
 
 const store = configureStore({
   reducer: {
     userTheme: userthemeSlice.reducer,
+    updateUserData: userDataslice.reducer,
   },
 });
 
