@@ -7,10 +7,11 @@ import {
   Pressable,
 } from "react-native";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-export default function Userhomescreen({ navigation }) {
-  // const dispatch = useDispatch();
+export default function Userhomescreen({ navigation, route }) {
   const userTheme = useSelector((state) => state.userTheme);
+  // const userData = route.params.userDataFromSecureStore;
 
   // let colorScheme = useColorScheme();
 
@@ -25,6 +26,7 @@ export default function Userhomescreen({ navigation }) {
   return (
     <View style={[styles.container, screencolor]}>
       <Text style={[textcolor]}>User home screen</Text>
+      {/* <Text style={[textcolor]}> {userData.User_Email} </Text> */}
     </View>
   );
 }

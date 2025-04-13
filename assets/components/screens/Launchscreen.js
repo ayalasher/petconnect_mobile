@@ -41,13 +41,33 @@ export default function LaunchScreen({ navigation }) {
   useEffect(() => {
     const checkUserAuth = async () => {
       try {
-        const datafetching = await getUserData();
+        const datafetching = getUserData();
+        console.log(`Data fetched:${datafetching}`);
+
+        // Setting the userData to data fetching...
         setUserData(datafetching);
+        console.log(`Type of userData : ${typeof userdata}`);
+
+        // Auth if the data being fetched is not available.
+        if (!datafetching) {
+          setIsauthenticated(false);
+
+          navigation.navigate("Auth as user or SPP");
+        }
         console.log(userdata);
-        if (datafetching !== null) {
+        if (userdata.User_Email) {
           // User is authenticated
           setIsauthenticated(true);
-          navigation.navigate("User bottom tab screens");
+          // navigating to the preffered screen set.
+          navigation.navigate("User bottom tab screens", {
+            // userDataFromSecureStore: userdata,
+          });
+        } else if (userdata.Establishment_email) {
+          setIsauthenticated(true);
+          // navigating to the preffred screen set.
+          navigation.navigate("SPP bottom tab screens", {
+            // sppDataFromTheSecureStore: userdata,
+          });
         } else {
           // No valid user data found
           setIsauthenticated(false);
@@ -59,8 +79,9 @@ export default function LaunchScreen({ navigation }) {
         navigation.navigate("Auth as user or SPP");
       }
     };
+
     checkUserAuth();
-  }, []);
+  }, [navigation]);
 
   return (
     <View style={[styles.container, screencolor]}>
