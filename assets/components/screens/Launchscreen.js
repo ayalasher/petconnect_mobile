@@ -41,29 +41,29 @@ export default function LaunchScreen({ navigation }) {
   useEffect(() => {
     const checkUserAuth = async () => {
       try {
-        const datafetching = getUserData() && getUserData() && getUserData();
+        const datafetching = await getUserData();
 
         console.log(`Data fetched:${datafetching}`);
-
-        // Setting the userData to data fetching...
-        setUserData(datafetching);
-        console.log(`Type of userData : ${typeof userdata}`);
-
         // Auth if the data being fetched is not available.
         if (!datafetching) {
           setIsauthenticated(false);
 
+          console.log(`Error fetching user data`);
           navigation.navigate("Auth as user or SPP");
         }
-        console.log(userdata);
-        if (userdata.User_Email) {
+
+        // Setting the userData to data fetching...
+        setUserData(datafetching);
+        // console.log(`Type of userData : ${typeof userdata}`);
+        // console.log(userdata);
+        if (datafetching.User_Email) {
           // User is authenticated
           setIsauthenticated(true);
           // navigating to the preffered screen set.
           navigation.navigate("User bottom tab screens", {
             // userDataFromSecureStore: userdata,
           });
-        } else if (userdata.Establishment_email) {
+        } else if (datafetching.Establishment_email) {
           setIsauthenticated(true);
           // navigating to the preffred screen set.
           navigation.navigate("SPP bottom tab screens", {
