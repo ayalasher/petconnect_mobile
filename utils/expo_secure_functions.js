@@ -41,6 +41,7 @@ export const removeUserData = async () => {
   try {
     await SecureStore.deleteItemAsync("userData");
     await SecureStore.deleteItemAsync("userToken");
+    console.log(`SUCCESS`);
   } catch (error) {
     console.log("Error removing user data:", error);
   }

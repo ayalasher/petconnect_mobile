@@ -77,6 +77,10 @@ export default function App() {
         <Tab.Screen
           name=" User Home screen "
           component={Userhomescreen}
+          // Important: Add this initialParams to pass data from route params
+          initialParams={({ route }) => ({
+            userDataFromSecureStore: route.params?.userDataFromSecureStore,
+          })}
           options={{
             headerShown: false,
             title: "Home",

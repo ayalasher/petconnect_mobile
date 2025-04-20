@@ -52,25 +52,27 @@ export default function LaunchScreen({ navigation }) {
           navigation.navigate("Auth as user or SPP");
         }
 
-        // Setting the userData to data fetching...
         setUserData(datafetching);
-        // console.log(`Type of userData : ${typeof userdata}`);
-        // console.log(userdata);
+
         if (datafetching.User_Email) {
-          // User is authenticated
           setIsauthenticated(true);
-          // navigating to the preffered screen set.
-          navigation.navigate("User bottom tab screens", {
-            // userDataFromSecureStore: userdata,
+          // Either use this simplified navigation:
+          // Correct way of sending user data from a stack to bottom tabs
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: "User bottom tab screens",
+                params: { userDataFromSecureStore: datafetching },
+              },
+            ],
           });
         } else if (datafetching.Establishment_email) {
           setIsauthenticated(true);
-          // navigating to the preffred screen set.
           navigation.navigate("SPP bottom tab screens", {
-            // sppDataFromTheSecureStore: userdata,
+            sppDataFromTheSecureStore: datafetching,
           });
         } else {
-          // No valid user data found
           setIsauthenticated(false);
           navigation.navigate("Auth as user or SPP");
         }
