@@ -41,7 +41,8 @@ export default function LaunchScreen({ navigation }) {
   useEffect(() => {
     const checkUserAuth = async () => {
       try {
-        const datafetching = getUserData();
+        const datafetching = getUserData() && getUserData() && getUserData();
+
         console.log(`Data fetched:${datafetching}`);
 
         // Setting the userData to data fetching...
