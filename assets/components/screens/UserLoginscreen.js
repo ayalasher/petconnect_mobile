@@ -12,6 +12,7 @@ import {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { storeUserData } from "../../../utils/expo_secure_functions";
+import { supabase } from "../../utils/Supabase";
 
 export default function UserLoginscreen({ navigation }) {
   const userTheme = useSelector((state) => state.userTheme);
@@ -20,6 +21,8 @@ export default function UserLoginscreen({ navigation }) {
     userEmail: "",
     password: "",
   });
+
+  const [isLoading, setIsloading] = useState(false);
 
   const screencolor =
     userTheme === "dark"
