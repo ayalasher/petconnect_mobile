@@ -42,16 +42,12 @@ export default function UserLoginscreen({ navigation }) {
       // route is set to localhost for testing purposes
       console.log(`Inside the try`);
 
-      const response = await axios.post(
-        "http://192.168.100.10:3000/backend/userLogin",
-        userdata,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("", userdata, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       console.log(response.data);
       if (response.data) {

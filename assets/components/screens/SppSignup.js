@@ -36,15 +36,11 @@ export default function UserSignupscreen({ navigation }) {
 
   async function signUphandler() {
     try {
-      let response = await axios.post(
-        "http://192.168.100.10:3000/backend/SignUpForServiceAndProductProviders",
-        sppdata,
-        {
-          headers: {
-            "Content-Type": "Application/json",
-          },
-        }
-      );
+      let response = await axios.post("", sppdata, {
+        headers: {
+          "Content-Type": "Application/json",
+        },
+      });
       console.log(response.data);
       if (response.data) {
         // Save user data securely

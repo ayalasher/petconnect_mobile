@@ -34,15 +34,11 @@ export default function UserLoginscreen({ navigation }) {
 
   async function loginHandler() {
     try {
-      let response = await axios.post(
-        "http://192.168.100.10:3000/backend/loginForServiceAndProductProviders",
-        sppdata,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let response = await axios.post("", sppdata, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response.data);
       if (response.data) {
         await storeUserData(response.data);

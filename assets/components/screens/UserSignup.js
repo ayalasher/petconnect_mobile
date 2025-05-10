@@ -38,15 +38,11 @@ export default function UserSignupscreen({ navigation }) {
 
   async function signUpHandler() {
     try {
-      let response = await axios.post(
-        "http://192.168.100.10:3000/backend/userSignUp/",
-        userdata,
-        {
-          headers: {
-            "Content-Type": "Application/json",
-          },
-        }
-      );
+      let response = await axios.post("", userdata, {
+        headers: {
+          "Content-Type": "Application/json",
+        },
+      });
       console.log(`Outside expo-secure section.`);
       console.log(response.data);
 
